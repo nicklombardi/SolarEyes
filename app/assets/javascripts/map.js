@@ -22,7 +22,7 @@
             getAreasFromMap:true,
                     zoomLevel: 1,
         zoomLongitude: 18,
-        zoomLatitude: 35
+        zoomLatitude: 30
         };
         // pass data provider to the map object
         map.dataProvider = dataProvider;
