@@ -20,9 +20,9 @@
         var dataProvider = {
             mapVar: AmCharts.maps.usaHigh,
             getAreasFromMap:true,
-                    zoomLevel: 1,
-        zoomLongitude: 18,
-        zoomLatitude: 30
+            zoomLevel: 1,
+            zoomLongitude: 18,
+            zoomLatitude: 20
         };
         // pass data provider to the map object
         map.dataProvider = dataProvider;
@@ -33,7 +33,8 @@
          */
         map.areasSettings = {
             autoZoom: true,
-            selectedColor: "#CC0000"
+            selectedColor: "#60ABEB",
+            rollOverOutlineColor: "#3277BA"
         };
 
         // let's say we want a small map to be displayed, so let's create it
