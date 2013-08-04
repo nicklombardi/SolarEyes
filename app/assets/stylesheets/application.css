@@ -13,24 +13,24 @@
  */
 
 
+html {
+  height: 100%;
+}
+
 body {
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 200;
-  background-image: -ms-radial-gradient(left top, circle farthest-side, #73B7EB 0%, #3277BA 60%);
 
-/* Mozilla Firefox */
-background-image: -moz-radial-gradient(left top, circle farthest-side, #73B7EB 0%, #3277BA 60%);
-
-/* Opera */
-background-image: -o-radial-gradient(left top, circle farthest-side, #73B7EB 0%, #3277BA 60%);
-
-/* Webkit (Safari/Chrome 10) */
-background-image: -webkit-gradient(radial, left top, 0, left top, 970, color-stop(0, #73B7EB), color-stop(.6, #3277BA));
-
-/* Webkit (Chrome 11+) */
-background-image: -webkit-radial-gradient(left top, circle farthest-side, #73B7EB 0%, #3277BA 60%);
-
-/* W3C Markup, IE10 Release Preview */
-background-image: radial-gradient(circle farthest-side at left top, #73B7EB 0%, #3277BA 60%);
+  background-image: -ms-radial-gradient(center top, circle farthest-side, #73B7EB 0%, #3277BA 90%);
+  background-image: -moz-radial-gradient(center top, circle farthest-side, #73B7EB 0%, #3277BA 90%);
+  background-image: -o-radial-gradient(center top, circle farthest-side, #73B7EB 0%, #3277BA 90%);
+  background-image: -webkit-gradient(radial, center top, 0, center top, 485, color-stop(0, #73B7EB), color-stop(.9, #3277BA));
+  background-image: -webkit-radial-gradient(center top, circle farthest-side, #73B7EB 0%, #3277BA 90%);
+  background-image: radial-gradient(circle farthest-side at center top, #73B7EB 0%, #3277BA 90%);
 }
+
