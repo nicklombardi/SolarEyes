@@ -19,7 +19,10 @@
         */
         var dataProvider = {
             mapVar: AmCharts.maps.usaHigh,
-            getAreasFromMap:true
+            getAreasFromMap:true,
+                    zoomLevel: 1,
+        zoomLongitude: 18,
+        zoomLatitude: 35
         };
         // pass data provider to the map object
         map.dataProvider = dataProvider;
