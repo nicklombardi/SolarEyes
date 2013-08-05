@@ -5,7 +5,7 @@
 
         fitMapToContainer = true;
         // set path to images
-        map.pathToImages = "/assets";
+        map.pathToImages = "/assets/";
 
         /* create data provider object
          mapVar tells the map name of the variable of the map data. You have to
@@ -22,7 +22,7 @@
             getAreasFromMap:true,
             zoomLevel: 1,
             zoomLongitude: 18,
-            zoomLatitude: 20
+            zoomLatitude: 30
         };
         // pass data provider to the map object
         map.dataProvider = dataProvider;
@@ -34,7 +34,7 @@
         map.areasSettings = {
             autoZoom: true,
             selectedColor: "#60ABEB",
-            rollOverOutlineColor: "#3277BA"
+            rollOverOutlineColor: "#60ABEB"
         };
 
         // let's say we want a small map to be displayed, so let's create it
