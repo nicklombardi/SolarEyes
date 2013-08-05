@@ -33,3 +33,14 @@ body {
   background-image: -webkit-radial-gradient(center top, circle farthest-side, #73B7EB 0%, #3277BA 90%);
   background-image: radial-gradient(circle farthest-side at center top, #73B7EB 0%, #3277BA 90%);
 }
+
+@font-face {
+  font-family: 'glyphiconshalflings-regular';
+  src:url('glyphiconshalflings-regular.eot);
+  src:url('glyphiconshalflings-regular.eot?#iefix') format('embedded-opentype'),
+    url('glyphiconshalflings-regular.svg#glyphiconshalflings-regular') format('svg'),
+    url('glyphiconshalflings-regular.woff') format('woff'),
+    url('glyphiconshalflings-regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
