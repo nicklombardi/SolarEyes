@@ -5,7 +5,6 @@ gem 'rails', '3.2.13'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
 
 
 # Gems used only for assets and not required
@@ -37,7 +36,12 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'debugger'
 
+# We need the pg gem for Heroku (which is our production environment)
+# Heroku will automatically configure out config/database.yml file when we deploy
+gem 'pg', :group => :production
+
 group :development, :test do
+  gem 'sqlite3'             # Heroku doesn't run sqlite3, but Postgres. However, we can use Postgres locally
   gem 'pry-rails'           # Causes rails console to open pry
                             # https://github.com/rweng/pry-rails
   gem 'pry-debugger'        # Adds step, next, finish, and continue commands and breakpoints
