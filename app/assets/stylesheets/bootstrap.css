@@ -1705,9 +1705,9 @@ textarea.input-small {
 
 .btn {
   display: inline-block;
-  padding: 6px 12px;
+  padding: 5px 12px;
   margin-bottom: 0;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   line-height: 1.428571429;
   text-align: center;
@@ -2055,6 +2055,7 @@ input[type="button"].btn-block {
   position: relative;
   display: table;
   border-collapse: separate;
+  width: 183px;
 }
 
 .input-group.col {
@@ -2088,17 +2089,17 @@ input[type="button"].btn-block {
 }
 
 .input-group-addon {
-  padding: 6px 12px;
-  font-size: 14px;
-  font-weight: normal;
-  line-height: 1.428571429;
-  text-align: center;
-  background-color: #eeeeee;
-  border: 1px solid #cccccc;
+  /*padding: 6px 12px;*/
+  font-size: 16px;
+/*  font-weight: normal;
+  line-height: 1.428571429;*/
+  text-align: left;
+  /*background-color: #eeeeee;*/
+/*  border: 1px solid #cccccc;
   border-radius: 4px;
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
-          box-sizing: border-box;
+          box-sizing: border-box;*/
 }
 
 .input-group-addon.input-small {
