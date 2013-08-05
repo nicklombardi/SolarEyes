@@ -3,13 +3,15 @@
         // create AmMap object
         var map = new AmCharts.AmMap();
 
+        var descriptionAK = 'please work';
+
         fitMapToContainer = true;
         // set path to images
         map.pathToImages = "/assets/";
 
         map.balloon.adjustBorderColor = true;
         map.balloon.borderColor = "#BDBDBD";
-        map.balloon.color = "#626932";
+        map.balloon.color = "#333333";
         map.balloon.fillColor = "#FFFFFF";
         map.balloon.cornerRadius = "3";
         map.balloon.borderThickness = "1";
@@ -31,15 +33,14 @@
         */
         var dataProvider = {
             mapVar: AmCharts.maps.usaHigh,
-            getAreasFromMap:true,
+            // getAreasFromMap:false,
+
+            areas: [{id:"US-AK", description: descriptionAK},{id:"US-AL"},{id:"US-AR"},{id:"US-AZ"},{id:"US-CA"},{id:"US-CO"},{id:"US-CT"},{id:"US-DC"},{id:"US-DE"},{id:"US-FL"},{id:"US-GA"},{id:"US-HI"},{id:"US-IA"},{id:"US-ID"},{id:"US-IL"},{id:"US-IN"},{id:"US-KS"},{id:"US-KY"},{id:"US-LA"},{id:"US-MA"},{id:"US-MD"},{id:"US-ME"},{id:"US-MI"},{id:"US-MN"},{id:"US-MO"},{id:"US-MS"},{id:"US-MT"},{id:"US-NC"},{id:"US-ND"},{id:"US-NE"},{id:"US-NH"},{id:"US-NJ"},{id:"US-NM"},{id:"US-NV"},{id:"US-NY"},{id:"US-OH"},{id:"US-OK"},{id:"US-OR"},{id:"US-PA"},{id:"US-RI"},{id:"US-SC"},{id:"US-SD"},{id:"US-TN"},{id:"US-TX"},{id:"US-UT"},{id:"US-VA"},{id:"US-VT"},{id:"US-WA"},{id:"US-WI"},{id:"US-WV"},{id:"US-WY"}],
+
             zoomLevel: 1,
             zoomLongitude: 18,
-            zoomLatitude: 30,
-
-            // areas: {id:"US-AK"},{id:"US-AL"},{id:"US-AR"},{id:"US-AZ"},{id:"US-CA"},{id:"US-CO"},{id:"US-CT"},{id:"US-DC"},{id:"US-DE"},{id:"US-FL"},{id:"US-GA"},{id:"US-HI"},{id:"US-IA"},{id:"US-ID"},{id:"US-IL"},{id:"US-IN"},{id:"US-KS"},{id:"US-KY"},{id:"US-LA"},{id:"US-MA"},{id:"US-MD"},{id:"US-ME"},{id:"US-MI"},{id:"US-MN"},{id:"US-MO"},{id:"US-MS"},{id:"US-MT"},{id:"US-NC"},{id:"US-ND"},{id:"US-NE"},{id:"US-NH"},{id:"US-NJ"},{id:"US-NM"},{id:"US-NV"},{id:"US-NY"},{id:"US-OH"},{id:"US-OK"},{id:"US-OR"},{id:"US-PA"},{id:"US-RI"},{id:"US-SC"},{id:"US-SD"},{id:"US-TN"},{id:"US-TX"},{id:"US-UT"},{id:"US-VA"},{id:"US-VT"},{id:"US-WA"},{id:"US-WI"},{id:"US-WV"},{id:"US-WY"}
+            zoomLatitude: 30
         };
-        // pass data provider to the map object
-        map.dataProvider = dataProvider;
 
         /* create areas settings
          * autoZoom set to true means that the map will zoom-in when clicked on the area
@@ -47,9 +48,16 @@
          */
         map.areasSettings = {
             autoZoom: true,
-            selectedColor: "#60ABEB",
-            rollOverOutlineColor: "#3277BA"
+            descriptionWindowY: 350,
+            descriptionWindowX: 800,
+            descriptionWindowWidth: 280,
+            descriptionWindowHeight: 330,
+            rollOverOutlineColor: "#3277BA",
+            selectedColor: "#60ABEB"
         };
+
+        // pass data provider to the map object
+        map.dataProvider = dataProvider;
 
         // let's say we want a small map to be displayed, so let's create it
         // map.smallMap = new AmCharts.SmallMap();
