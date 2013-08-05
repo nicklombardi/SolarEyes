@@ -39,7 +39,7 @@ function makeMap(){
 
     var descriptionAK = 'please work, i think this works! ' + (stateBarrelsOfOilPerYear[0]).toString();
 
-    var descriptionAL = '<div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-certificate" style="color:#FFCC21"></span> &nbsp;</span><input type="text" class="form-control" autofocus="true" placeholder="installs" name="installs"><span class="input-group-btn"><button class="btn btn-primary" type="button">Calculate</button></span></div><p style="line-height:"3px"> </p><span class="glyphicon glyphicon-tint"></span> barrels saved annually: 29.63 <br><span class="glyphicon glyphicon-usd" style="color#00AB01"></span> value: 3140.78';
+    var descriptionAL = '<div class="input-group"><span class="input-group-addon"><span class="glyphicons glyphicon-sun" style="color:#FFCC21"></span> &nbsp;</span><input type="text" class="form-control" autofocus="true" placeholder="installs" name="installs"><span class="input-group-btn"><button class="btn btn-primary" type="button">Calculate</button></span></div><p style="line-height:"3px"> </p><span class="glyphicon glyphicon-tint"></span> barrels saved annually: 29.63 <br><span class="glyphicon glyphicon-usd" style="color#00AB01"></span> value: 3140.78';
 
     fitMapToContainer = true;
     // set path to images
