@@ -1,5 +1,19 @@
+    // function to grab data from #index action in home_controller.rb
+    var stateInfo = function() {
+        $.ajax({
+            url: '/',
+            dataType: 'json',
+            data: 'GET'
+        }).done(function(data){
+            console.log(data);
+        });
+    };
+
    // add all your code to this method, as this will ensure that page is loaded
     AmCharts.ready(function() {
+        // call stateInfo function
+        stateInfo();
+
         // create AmMap object
         var map = new AmCharts.AmMap();
 
