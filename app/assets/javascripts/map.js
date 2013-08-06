@@ -1,15 +1,5 @@
+// global variables
 var stateBarrelsOfOilPerYear = [];
-
-function createStateDescriptions(data) {
-    for (var i = 0; i < data.length; i++) {
-        //console.log(data[i].state_name + ": " + data[i].barrels_of_oil_per_year);
-        stateBarrelsOfOilPerYear.push(data[i].barrels_of_oil_per_year);
-        // debugger;
-    }
-    console.log("test you" + stateBarrelsOfOilPerYear[0]);
-    // return stateBarrelsOfOilPerYear;
-    makeMap();
-}
 
 // function to grab json data from #index action in home_controller.rb
 function stateInfo() {
@@ -23,16 +13,16 @@ function stateInfo() {
     });
 }
 
-// add all your code to this method, as this will ensure that page is loaded
-AmCharts.ready(function() {
+// function to create state descriptions for when user clicks on a state in the map to see description
+function createStateDescriptions(data) {
+    for (var i = 0; i < data.length; i++) {
+        stateBarrelsOfOilPerYear.push(data[i].barrels_of_oil_per_year);
+    }
+    // call makeMap function
+    makeMap();
+}
 
-    stateInfo();
-    // call stateInfo function
-    console.log("test me" + stateBarrelsOfOilPerYear[0]);
-
-
-});
-
+// content of this function originally inside amCharts.ready function
 function makeMap(){
      // create AmMap object
     var map = new AmCharts.AmMap();
@@ -104,3 +94,12 @@ function makeMap(){
     // write the map to container div
     map.write("mapdiv");
 }
+
+// add all your code to this method, as this will ensure that page is loaded
+AmCharts.ready(function() {
+
+    // call stateInfo function
+    stateInfo();
+    console.log("test me" + stateBarrelsOfOilPerYear[0]);
+
+});
