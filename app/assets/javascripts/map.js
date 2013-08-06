@@ -1,5 +1,13 @@
 // global variables
-var stateBarrelsOfOilPerYear = [];
+var areasArray = [];
+
+if (typeof Object.create !== 'function') {
+  Object.create = function(o) {
+    var F = function() {};
+    F.prototype = o;
+    return new F();
+  };
+}
 
 // function to grab json data from #index action in home_controller.rb
 function stateInfo() {
@@ -9,16 +17,24 @@ function stateInfo() {
         data: 'GET'
     }).done(function(data){
         console.log(data);
-        return createStateDescriptions(data);
+        createAreas(data);
     });
 }
 
-// function to create state descriptions for when user clicks on a state in the map to see description
-function createStateDescriptions(data) {
-    for (var i = 0; i < data.length; i++) {
-        stateBarrelsOfOilPerYear.push(data[i].barrels_of_oil_per_year);
+// object to clone
+var area = {
+    id: "",
+    description: ""
+};
+
+function createAreas(data) {
+    for (var j = 0; j < data.length; j++) {
+        var newArea = Object.create(area);
+        newArea.id = data[j].state_name;
+        // based on Arizona
+        newArea.description = '<div class="input-group"><span class="input-group-addon"><span class="glyphicons glyphicon-sun" style="color:#FFCC21"></span> &nbsp;</span><input type="text" class="form-control" autofocus="true" placeholder="installs" id="installs"><span class="input-group-btn"><button class="btn btn-primary" type="button" id="calc-button">Calculate</button></span></div><p style="line-height:"3px"> </p><span class="glyphicon glyphicon-tint"></span> barrels saved annually: ' + ( 2 * (data[j].barrels_of_oil_per_year)) + '<br><span class="glyphicon glyphicon-usd" style="color#00AB01"></span> value: 3140.78';
+        areasArray.push(newArea);
     }
-    // call makeMap function
     makeMap();
 }
 
@@ -26,14 +42,6 @@ function createStateDescriptions(data) {
 function makeMap(){
      // create AmMap object
     var map = new AmCharts.AmMap();
-
-    var descriptionAK = 'please work, i think this works! ' + (stateBarrelsOfOilPerYear[0]).toString();
-
-    var descriptionAL = '<div class="input-group"><span class="input-group-addon"><span class="glyphicons glyphicon-sun" style="color:#FFCC21"></span> &nbsp;</span><input type="text" class="form-control" autofocus="true" placeholder="installs" name="installs"><span class="input-group-btn"><button class="btn btn-primary" type="button">Calculate</button></span></div><p style="line-height:"3px"> </p><span class="glyphicon glyphicon-tint"></span> barrels saved annually: 29.63 <br><span class="glyphicon glyphicon-usd" style="color#00AB01"></span> value: 3140.78';
-
-    var descriptionAR = 'test';
-
-    var descriptionAZ = '<div class="input-group"><span class="input-group-addon"><span class="glyphicons glyphicon-sun" style="color:#FFCC21"></span> &nbsp;</span><input type="text" class="form-control" autofocus="true" placeholder="installs" id="installs"><span class="input-group-btn"><button class="btn btn-primary" type="button" id="calc-button">Calculate</button></span></div><p style="line-height:"3px"> </p><span class="glyphicon glyphicon-tint"></span> barrels saved annually: ' + ( 2 * (stateBarrelsOfOilPerYear[3]).toFixed(2).toString()) + '<br><span class="glyphicon glyphicon-usd" style="color#00AB01"></span> value: 3140.78';
 
     fitMapToContainer = true;
     // set path to images
@@ -65,7 +73,9 @@ function makeMap(){
         mapVar: AmCharts.maps.usaHigh,
         // getAreasFromMap:false,
 
-        areas: [{id:"US-AK", description: descriptionAK},{id:"US-AL", description: descriptionAL},{id:"US-AR", description: descriptionAR},{id:"US-AZ", description: descriptionAZ},{id:"US-CA"},{id:"US-CO"},{id:"US-CT"},{id:"US-DC"},{id:"US-DE"},{id:"US-FL"},{id:"US-GA"},{id:"US-HI"},{id:"US-IA"},{id:"US-ID"},{id:"US-IL"},{id:"US-IN"},{id:"US-KS"},{id:"US-KY"},{id:"US-LA"},{id:"US-MA"},{id:"US-MD"},{id:"US-ME"},{id:"US-MI"},{id:"US-MN"},{id:"US-MO"},{id:"US-MS"},{id:"US-MT"},{id:"US-NC"},{id:"US-ND"},{id:"US-NE"},{id:"US-NH"},{id:"US-NJ"},{id:"US-NM"},{id:"US-NV"},{id:"US-NY"},{id:"US-OH"},{id:"US-OK"},{id:"US-OR"},{id:"US-PA"},{id:"US-RI"},{id:"US-SC"},{id:"US-SD"},{id:"US-TN"},{id:"US-TX"},{id:"US-UT"},{id:"US-VA"},{id:"US-VT"},{id:"US-WA"},{id:"US-WI"},{id:"US-WV"},{id:"US-WY"}],
+        // areas: [{id:"US-AK", description: descriptionAK},{id:"US-AL", description: descriptionAL},{id:"US-AR", description: descriptionAR},{id:"US-AZ", description: descriptionAZ},{id:"US-CA"},{id:"US-CO"},{id:"US-CT"},{id:"US-DC"},{id:"US-DE"},{id:"US-FL"},{id:"US-GA"},{id:"US-HI"},{id:"US-IA"},{id:"US-ID"},{id:"US-IL"},{id:"US-IN"},{id:"US-KS"},{id:"US-KY"},{id:"US-LA"},{id:"US-MA"},{id:"US-MD"},{id:"US-ME"},{id:"US-MI"},{id:"US-MN"},{id:"US-MO"},{id:"US-MS"},{id:"US-MT"},{id:"US-NC"},{id:"US-ND"},{id:"US-NE"},{id:"US-NH"},{id:"US-NJ"},{id:"US-NM"},{id:"US-NV"},{id:"US-NY"},{id:"US-OH"},{id:"US-OK"},{id:"US-OR"},{id:"US-PA"},{id:"US-RI"},{id:"US-SC"},{id:"US-SD"},{id:"US-TN"},{id:"US-TX"},{id:"US-UT"},{id:"US-VA"},{id:"US-VT"},{id:"US-WA"},{id:"US-WI"},{id:"US-WV"},{id:"US-WY"}],
+
+        areas: areasArray,
 
         zoomLevel: 1,
         zoomLongitude: 18,
@@ -100,6 +110,5 @@ AmCharts.ready(function() {
 
     // call stateInfo function
     stateInfo();
-    console.log("test me" + stateBarrelsOfOilPerYear[0]);
 
 });
