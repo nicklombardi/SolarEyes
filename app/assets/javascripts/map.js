@@ -85,7 +85,6 @@ function makeMap(){
     map.areasSettings = {
         autoZoom: true,
         descriptionWindowY: 350,
-        descriptionWindowX: 800,
         descriptionWindowWidth: 280,
         descriptionWindowHeight: 330,
         rollOverOutlineColor: "#3277BA",
