@@ -1,5 +1,9 @@
 var stateBarrelsOfOilPerYear = [];
 
+var input = "";
+
+var oilBarrels = "";
+
 function createStateDescriptions(data) {
     for (var i = 0; i < data.length; i++) {
         //console.log(data[i].state_name + ": " + data[i].barrels_of_oil_per_year);
@@ -26,12 +30,30 @@ function stateInfo() {
 // add all your code to this method, as this will ensure that page is loaded
 AmCharts.ready(function() {
 
-    stateInfo();
     // call stateInfo function
-    console.log("test me" + stateBarrelsOfOilPerYear[0]);
-
+    stateInfo();
 
 });
+
+
+function mapClick(){
+    console.log('map clicked');
+    input = $('#installs').val();
+    console.log(input);
+    var oilBarrelsLocal = input * (stateBarrelsOfOilPerYear[3]).toFixed(2).toString();
+    console.log(oilBarrelsLocal);
+
+    oilBarrels = oilBarrelsLocal;
+
+    makeDescription();
+}
+
+
+function makeDescription() {
+    console.log(oilBarrels + "make description");
+
+    var descriptionAZ = '<div class="input-group"><span class="input-group-addon"><span class="glyphicons glyphicon-sun" style="color:#FFCC21"></span> &nbsp;</span><input type="number" class="form-control" autofocus="true" placeholder="installs" id="installs"><span class="input-group-btn"><button class="btn btn-primary" type="button" id="calc-button">Calculate</button></span></div><p style="line-height:"3px"> </p><span class="glyphicon glyphicon-tint"></span> barrels saved annually: ' + oilBarrels.toString() + '<br><span class="glyphicon glyphicon-usd" style="color#00AB01"></span> value: 3140.78';
+}
 
 function makeMap(){
      // create AmMap object
@@ -43,7 +65,7 @@ function makeMap(){
 
     var descriptionAR = 'test';
 
-    var descriptionAZ = '<div class="input-group"><span class="input-group-addon"><span class="glyphicons glyphicon-sun" style="color:#FFCC21"></span> &nbsp;</span><input type="number" class="form-control" autofocus="true" placeholder="installs" id="installs"><span class="input-group-btn"><button class="btn btn-primary" type="button" id="calc-button">Calculate</button></span></div><p style="line-height:"3px"> </p><span class="glyphicon glyphicon-tint"></span> barrels saved annually: ' + ( 2 * (stateBarrelsOfOilPerYear[3]).toFixed(2).toString()) + '<br><span class="glyphicon glyphicon-usd" style="color#00AB01"></span> value: 3140.78';
+    var descriptionAZ = '<div class="input-group"><span class="input-group-addon"><span class="glyphicons glyphicon-sun" style="color:#FFCC21"></span> &nbsp;</span><input type="number" class="form-control" autofocus="true" placeholder="installs" id="installs"><span class="input-group-btn"><button class="btn btn-primary" type="button" id="calc-button">Calculate</button></span></div><p style="line-height:"3px"> </p><span class="glyphicon glyphicon-tint"></span> barrels saved annually: ' + oilBarrels.toString() + '<br><span class="glyphicon glyphicon-usd" style="color#00AB01"></span> value: 3140.78';
 
     fitMapToContainer = true;
     // set path to images
@@ -73,7 +95,7 @@ function makeMap(){
     */
     var dataProvider = {
         mapVar: AmCharts.maps.usaHigh,
-        // getAreasFromMap:false,
+        getAreasFromMap:true,
 
         areas: [{id:"US-AK", description: descriptionAK},{id:"US-AL", description: descriptionAL},{id:"US-AR", description: descriptionAR},{id:"US-AZ", description: descriptionAZ},{id:"US-CA"},{id:"US-CO"},{id:"US-CT"},{id:"US-DC"},{id:"US-DE"},{id:"US-FL"},{id:"US-GA"},{id:"US-HI"},{id:"US-IA"},{id:"US-ID"},{id:"US-IL"},{id:"US-IN"},{id:"US-KS"},{id:"US-KY"},{id:"US-LA"},{id:"US-MA"},{id:"US-MD"},{id:"US-ME"},{id:"US-MI"},{id:"US-MN"},{id:"US-MO"},{id:"US-MS"},{id:"US-MT"},{id:"US-NC"},{id:"US-ND"},{id:"US-NE"},{id:"US-NH"},{id:"US-NJ"},{id:"US-NM"},{id:"US-NV"},{id:"US-NY"},{id:"US-OH"},{id:"US-OK"},{id:"US-OR"},{id:"US-PA"},{id:"US-RI"},{id:"US-SC"},{id:"US-SD"},{id:"US-TN"},{id:"US-TX"},{id:"US-UT"},{id:"US-VA"},{id:"US-VT"},{id:"US-WA"},{id:"US-WI"},{id:"US-WV"},{id:"US-WY"}],
 
@@ -97,6 +119,8 @@ function makeMap(){
 
     // pass data provider to the map object
     map.dataProvider = dataProvider;
+
+    $('#mapdiv').click(mapClick);
 
     // let's say we want a small map to be displayed, so let's create it
     // map.smallMap = new AmCharts.SmallMap();
