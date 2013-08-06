@@ -1,5 +1,6 @@
 // global variables
 var areasArray = [];
+var originalTableData = [];
 
 var input = 1;
 
@@ -22,6 +23,7 @@ function stateInfo() {
     }).done(function(data){
         console.log(data);
         createAreas(data);
+        saveOriginalTableData(data);
     });
 }
 
@@ -34,8 +36,8 @@ function mapClick(){
         input = 1;
     }
     console.log(input);
-
-    $('#barrels-display').text('potato');
+    var calculation = input *
+    $('#barrels-display').text(calculation);
 
 }
 
@@ -51,12 +53,19 @@ function createAreas(data) {
         var newArea = Object.create(area);
         newArea.id = data[j].state_name;
         // based on Arizona
-
         newArea.description = '<div class="input-group"><span class="input-group-addon"><span class="glyphicons glyphicon-sun" style="color:#FFCC21"></span> &nbsp;</span><input type="text" class="form-control" autofocus="true" placeholder="installs" id="installs"><span class="input-group-btn"><button class="btn btn-primary" type="button" id="calc-button">Calculate</button></span></div><p style="line-height:"3px"> </p><span class="glyphicon glyphicon-tint"></span> barrels saved annually: <span id="barrels-display">0</span><br><span class="glyphicon glyphicon-usd" style="color#00AB01"></span> value: 3140.78';
-
         areasArray.push(newArea);
     }
     makeMap();
+}
+
+function saveOriginalTableData(data) {
+    for (var i = 0; i < data.length; i ++) {
+        var newTableData = Object.create(area);
+        newTableData.id = data[i].state_name;
+        newTableData.description = data[i].barrels_of_oil_per_year;
+        originalTableData.push(newTableData);
+    }
 }
 
 // content of this function originally inside amCharts.ready function
