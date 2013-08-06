@@ -1,7 +1,8 @@
 // global variables
 var areasArray = [];
+var originalTableData = [];
 
-var input = "";
+var input = 0;
 
 var oilBarrels = "";
 
@@ -22,19 +23,32 @@ function stateInfo() {
     }).done(function(data){
         console.log(data);
         createAreas(data);
+        saveOriginalTableData(data);
     });
 }
 
-
+// function intended for when user clicks on calculate button
 function mapClick(){
     console.log('map clicked');
-    input = $('#installs').val();
+    if ($('#installs').val()) {
+        input = $('#installs').val();
+    } else {
+        input = 0;
+    }
     console.log(input);
 
-    $('#barrels-display').text(input * 'potato');
+    var stateAbbreviation = $(".state-abbreviation").attr("id");
+    var stateBarrels;
+    for (var k = 0; k < originalTableData.length; k++) {
+        if (originalTableData[k].id === stateAbbreviation) {
+            stateBarrels = originalTableData[k].description;
+        }
+    }
+
+    var calculation = input * stateBarrels;
+    $('#barrels-display').text(calculation.toFixed(2));
 
 }
-
 
 // object to clone
 var area = {
@@ -42,15 +56,25 @@ var area = {
     description: ""
 };
 
+// function readies areas attribute of var dataProvider in makeMap function
 function createAreas(data) {
     for (var j = 0; j < data.length; j++) {
         var newArea = Object.create(area);
         newArea.id = data[j].state_name;
         // based on Arizona
-        newArea.description = '<div class="input-group"><span class="input-group-addon"><span class="glyphicons glyphicon-sun" style="color:#FFCC21"></span> &nbsp;</span><input type="text" class="form-control" autofocus="true" placeholder="installs" id="installs"><span class="input-group-btn"><button class="btn btn-primary" type="button" id="calc-button">Calculate</button></span></div><p style="line-height:"3px"> </p><span class="glyphicon glyphicon-tint"></span> barrels saved annually: <span id="barrels-display">0</span><br><span class="glyphicon glyphicon-usd" style="color#00AB01"></span> value: <span class="state-abbreviation" id=' + data[j].state_name + '></span>';
+        newArea.description = '<div class="input-group"><span class="input-group-addon"><span class="glyphicons glyphicon-sun" style="color:#FFCC21"></span> &nbsp;</span><input type="text" class="form-control" autofocus="true" placeholder="installs" id="installs"><span class="input-group-btn"><button class="btn btn-primary" type="button" id="calc-button">Calculate</button></span></div><p style="line-height:"3px"> </p><span class="glyphicon glyphicon-tint"></span> barrels saved annually: <span id="barrels-display"> '+ input +' </span><br><span class="glyphicon glyphicon-usd" style="color#00AB01"></span> value: <span class="state-abbreviation" id=' + data[j].state_name + '></span>';
         areasArray.push(newArea);
     }
     makeMap();
+}
+
+function saveOriginalTableData(data) {
+    for (var i = 0; i < data.length; i ++) {
+        var newTableData = Object.create(area);
+        newTableData.id += data[i].state_name;
+        newTableData.description += data[i].barrels_of_oil_per_year;
+        originalTableData.push(newTableData);
+    }
 }
 
 // content of this function originally inside amCharts.ready function
@@ -113,12 +137,16 @@ function makeMap(){
     // pass data provider to the map object
     map.dataProvider = dataProvider;
 
-
     // let's say we want a small map to be displayed, so let's create it
     // map.smallMap = new AmCharts.SmallMap();
 
     // write the map to container div
     map.write("mapdiv");
+
+    $('#mapdiv').click(function(event) {
+        mapClick();
+        console.log(this);
+    });
 }
 
 // add all your code to this method, as this will ensure that page is loaded
