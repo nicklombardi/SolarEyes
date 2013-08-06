@@ -1,7 +1,7 @@
 // global variables
 var areasArray = [];
 
-var input = "";
+var input = 1;
 
 var oilBarrels = "";
 
@@ -28,10 +28,14 @@ function stateInfo() {
 
 function mapClick(){
     console.log('map clicked');
-    input = $('#installs').val();
+    if ($('#installs').val()) {
+        input = $('#installs').val();
+    } else {
+        input = 1;
+    }
     console.log(input);
-    oilBarrels = input * (stateBarrelsOfOilPerYear[3]).toFixed(2).toString();
-    console.log(oilBarrels);
+    // oilBarrels = input;
+    // console.log(oilBarrels);
 
 }
 
@@ -47,7 +51,7 @@ function createAreas(data) {
         var newArea = Object.create(area);
         newArea.id = data[j].state_name;
         // based on Arizona
-        newArea.description = '<div class="input-group"><span class="input-group-addon"><span class="glyphicons glyphicon-sun" style="color:#FFCC21"></span> &nbsp;</span><input type="text" class="form-control" autofocus="true" placeholder="installs" id="installs"><span class="input-group-btn"><button class="btn btn-primary" type="button" id="calc-button">Calculate</button></span></div><p style="line-height:"3px"> </p><span class="glyphicon glyphicon-tint"></span> barrels saved annually: ' + ( 2 * (data[j].barrels_of_oil_per_year.toFixed(2))) + '<br><span class="glyphicon glyphicon-usd" style="color#00AB01"></span> value: 3140.78';
+        newArea.description = '<div class="input-group"><span class="input-group-addon"><span class="glyphicons glyphicon-sun" style="color:#FFCC21"></span> &nbsp;</span><input type="text" class="form-control" autofocus="true" placeholder="installs" id="installs"><span class="input-group-btn"><button class="btn btn-primary" type="button" id="calc-button">Calculate</button></span></div><p style="line-height:"3px"> </p><span class="glyphicon glyphicon-tint"></span> barrels saved annually: ' + ( input * (data[j].barrels_of_oil_per_year.toFixed(2))) + '<br><span class="glyphicon glyphicon-usd" style="color#00AB01"></span> value: 3140.78';
         areasArray.push(newArea);
     }
     makeMap();
@@ -113,13 +117,16 @@ function makeMap(){
     // pass data provider to the map object
     map.dataProvider = dataProvider;
 
-    $('#mapdiv').click(mapClick);
-
     // let's say we want a small map to be displayed, so let's create it
     // map.smallMap = new AmCharts.SmallMap();
 
     // write the map to container div
     map.write("mapdiv");
+
+    $('#mapdiv').click(function(event) {
+        mapClick();
+        console.log(this);
+    });
 }
 
 // add all your code to this method, as this will ensure that page is loaded
