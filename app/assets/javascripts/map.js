@@ -39,11 +39,11 @@ function makeMap(){
 
     var descriptionAK = 'please work, i think this works! ' + (stateBarrelsOfOilPerYear[0]).toString();
 
-    var descriptionAL = '<div class="input-group"><span class="input-group-addon"><span class="glyphicons glyphicon-sun" style="color:#FFCC21"></span> &nbsp;</span><input type="text" class="form-control" autofocus="true" placeholder="installs" name="installs"><span class="input-group-btn"><button class="btn btn-primary" type="button">Calculate</button></span></div><p style="line-height:"3px"> </p><span class="glyphicon glyphicon-tint"></span> barrels saved annually: 29.63 <br><span class="glyphicon glyphicon-usd" style="color#00AB01"></span> value: 3140.78';
+    var descriptionAL = '<div class="input-group"><span class="input-group-addon"><span class="glyphicons glyphicon-sun" style="color:#FFCC21"></span> &nbsp;</span><input type="number" class="form-control" autofocus="true" placeholder="installs" name="installs"><span class="input-group-btn"><button class="btn btn-primary" type="button">Calculate</button></span></div><p style="line-height:"3px"> </p><span class="glyphicon glyphicon-tint"></span> barrels saved annually: 29.63 <br><span class="glyphicon glyphicon-usd" style="color#00AB01"></span> value: 3140.78';
 
     var descriptionAR = 'test';
 
-    var descriptionAZ = '<div class="input-group"><span class="input-group-addon"><span class="glyphicons glyphicon-sun" style="color:#FFCC21"></span> &nbsp;</span><input type="text" class="form-control" autofocus="true" placeholder="installs" id="installs"><span class="input-group-btn"><button class="btn btn-primary" type="button" id="calc-button">Calculate</button></span></div><p style="line-height:"3px"> </p><span class="glyphicon glyphicon-tint"></span> barrels saved annually: ' + ( 2 * (stateBarrelsOfOilPerYear[3]).toFixed(2).toString()) + '<br><span class="glyphicon glyphicon-usd" style="color#00AB01"></span> value: 3140.78';
+    var descriptionAZ = '<div class="input-group"><span class="input-group-addon"><span class="glyphicons glyphicon-sun" style="color:#FFCC21"></span> &nbsp;</span><input type="number" class="form-control" autofocus="true" placeholder="installs" id="installs"><span class="input-group-btn"><button class="btn btn-primary" type="button" id="calc-button">Calculate</button></span></div><p style="line-height:"3px"> </p><span class="glyphicon glyphicon-tint"></span> barrels saved annually: ' + ( 2 * (stateBarrelsOfOilPerYear[3]).toFixed(2).toString()) + '<br><span class="glyphicon glyphicon-usd" style="color#00AB01"></span> value: 3140.78';
 
     fitMapToContainer = true;
     // set path to images
