@@ -2,9 +2,11 @@
 var areasArray = [];
 var originalTableData = [];
 
-var input = 0;
+var input = "";
 
 var oilBarrels = "";
+
+var oil_price = "";
 
 if (typeof Object.create !== 'function') {
   Object.create = function(o) {
@@ -24,6 +26,17 @@ function stateInfo() {
         console.log(data);
         createAreas(data);
         saveOriginalTableData(data);
+    });
+}
+
+function getOilPrice() {
+    $.ajax({
+        url: '/get_oil_price',
+        dataType: 'json',
+        data: 'GET'
+    }).done(function(data){
+        console.log(data);
+        oil_price = data;
     });
 }
 
@@ -48,6 +61,12 @@ function mapClick(){
     var calculation = input * stateBarrels;
     $('#barrels-display').text(calculation.toFixed(2));
 
+    getOilPrice();
+    console.log(oil_price);
+
+    var oilCalculation = input * stateBarrels * oil_price;
+    $('#oil-value').text(oilCalculation.toFixed(2));
+
 }
 
 // object to clone
@@ -62,7 +81,7 @@ function createAreas(data) {
         var newArea = Object.create(area);
         newArea.id = data[j].state_name;
         // based on Arizona
-        newArea.description = '<div class="input-group"><span class="input-group-addon"><span class="glyphicons glyphicon-sun" style="color:#FFCC21"></span> &nbsp;</span><input type="text" class="form-control" autofocus="true" placeholder="installs" id="installs"><span class="input-group-btn"><button class="btn btn-primary" type="button" id="calc-button">Calculate</button></span></div><p style="line-height:"3px"> </p><span class="glyphicon glyphicon-tint"></span> barrels saved annually: <span id="barrels-display"> '+ input +' </span><br><span class="glyphicon glyphicon-usd" style="color#00AB01"></span> value: <span class="state-abbreviation" id=' + data[j].state_name + '></span>';
+        newArea.description = '<div class="input-group"><span class="input-group-addon"><span class="glyphicons glyphicon-sun" style="color:#FFCC21"></span> &nbsp;</span><input type="text" class="form-control" autofocus="true" placeholder="installs" id="installs"><span class="input-group-btn"><button class="btn btn-primary" type="button" id="calc-button">Calculate</button></span></div><p style="line-height:"3px"> </p><span class="glyphicon glyphicon-tint"></span> barrels saved annually: <span id="barrels-display"> '+ input +' </span><br><span class="glyphicon glyphicon-usd" style="color#00AB01"></span> value: <span id="oil-value"></span><span class="state-abbreviation" id=' + data[j].state_name + '></span>';
         areasArray.push(newArea);
     }
     makeMap();
