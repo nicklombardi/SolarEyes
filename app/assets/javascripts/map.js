@@ -42,7 +42,11 @@ function getOilPrice() {
 
 // function intended for when user clicks on calculate button
 function mapClick(){
+
     console.log('map clicked');
+
+    getOilPrice();
+    console.log(oil_price);
     if ($('#installs').val()) {
         input = $('#installs').val();
     } else {
@@ -61,12 +65,10 @@ function mapClick(){
     var calculation = input * stateBarrels;
     $('#barrels-display').text(calculation.toFixed(2));
 
-    getOilPrice();
-    console.log(oil_price);
-
     var oilCalculation = input * stateBarrels * oil_price;
     $('#oil-value').text(oilCalculation.toFixed(2));
 
+    // $("#mapdiv").unbind("click");
 }
 
 // object to clone
@@ -162,17 +164,15 @@ function makeMap(){
     // write the map to container div
     map.write("mapdiv");
 
-    $('#mapdiv').click(function(event) {
-        mapClick();
-        console.log(this);
-    });
+
+    $('#mapdiv').click(mapClick);
 }
 
 // add all your code to this method, as this will ensure that page is loaded
 AmCharts.ready(function() {
 
+    // $("#mapdiv").click(mapClick);
     // call stateInfo function
     stateInfo();
 
-    $('#mapdiv').click(mapClick);
 });
