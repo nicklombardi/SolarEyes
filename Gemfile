@@ -23,6 +23,8 @@ gem 'jquery-rails'
 
 gem 'yahoofinance'
 
+gem 'factory_girl_rails'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
@@ -46,6 +48,7 @@ group :development, :test do
   gem 'sqlite3'             # Heroku doesn't run sqlite3, but Postgres. However, we can use Postgres locally
   gem 'rspec'
   gem 'rspec-rails'
+  gem 'shoulda-matchers'
 end
 
 group :development do
