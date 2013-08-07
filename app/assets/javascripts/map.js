@@ -174,5 +174,4 @@ AmCharts.ready(function() {
     // call stateInfo function
     stateInfo();
 
-    $('#mapdiv').click(mapClick);
 });
