@@ -18,6 +18,7 @@ html {
 }
 
 body {
+  display: none;
   height: 100%;
   margin: 0;
   background-repeat: no-repeat;
@@ -48,10 +49,4 @@ body {
    padding:25px;
    cursor: pointer;
    text-align:justify;
-}
-
-.erb-image-wrapper img{
-    max-width:100% !important;
-    height:auto;
-    display:block;
 }
