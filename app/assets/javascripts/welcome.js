@@ -22,7 +22,7 @@ $('body').fadeIn(1000);
 
 
 
-$('.link').click(function(event) {
+$('link').click(function(event) {
 
 event.preventDefault();
 
