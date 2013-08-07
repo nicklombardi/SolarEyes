@@ -88,7 +88,6 @@ function mapClick(){
     var oilCalculation = input * stateBarrels * oil_price;
     $('#oil-value').text(oilCalculation.formatMoney(2, '.', ','));
 
-    // $("#mapdiv").unbind("click");
 }
 
 // object to clone
