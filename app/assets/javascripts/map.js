@@ -6,7 +6,8 @@ var input = "";
 
 var oilBarrels = "";
 
-var oil_price = "";
+// var oil_price = "";
+var oil_price;
 
 if (typeof Object.create !== 'function') {
   Object.create = function(o) {
