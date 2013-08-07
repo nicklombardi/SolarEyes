@@ -6,7 +6,7 @@ SolarEyes::Application.routes.draw do
 
   resources :welcome, only: [:index, :show]
 
-  get "/home/get_oil_price" => "home#get_oil_price"
+  get "/get_oil_price" => "home#get_oil_price"
 
 
   # The priority is based upon order of creation:
