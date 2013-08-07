@@ -6,8 +6,7 @@ var input = "";
 
 var oilBarrels = "";
 
-// var oil_price = "";
-var oil_price;
+var oil_price = "";
 
 if (typeof Object.create !== 'function') {
   Object.create = function(o) {
@@ -16,6 +15,17 @@ if (typeof Object.create !== 'function') {
     return new F();
   };
 }
+
+Number.prototype.formatMoney = function(c, d, t){
+var n = this,
+    c = isNaN(c = Math.abs(c)) ? 2 : c,
+    d = d == undefined ? "." : d,
+    t = t == undefined ? "," : t,
+    s = n < 0 ? "-" : "",
+    i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
+    j = (j = i.length) > 3 ? j % 3 : 0;
+   return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+ };
 
 // function to grab json data from #index action in home_controller.rb
 function stateInfo() {
@@ -36,7 +46,7 @@ function getOilPrice() {
         dataType: 'json',
         data: 'GET'
     }).done(function(data){
-        console.log(data);
+        console.log("get oil price data: " + data);
         oil_price = data;
     });
 }
@@ -46,14 +56,14 @@ function mapClick(){
 
     console.log('map clicked');
 
-    getOilPrice();
-    console.log(oil_price);
     if ($('#installs').val()) {
         input = $('#installs').val();
     } else {
         input = 0;
     }
-    console.log(input);
+
+    console.log("user input: " + input);
+    console.log("oil price: " + oil_price);
 
     var stateAbbreviation = $(".state-abbreviation").attr("id");
     var stateBarrels;
@@ -67,7 +77,7 @@ function mapClick(){
     $('#barrels-display').text(calculation.toFixed(2));
 
     var oilCalculation = input * stateBarrels * oil_price;
-    $('#oil-value').text(oilCalculation.toFixed(2));
+    $('#oil-value').text(oilCalculation.formatMoney(2, '.', ','));
 
     // $("#mapdiv").unbind("click");
 }
@@ -134,8 +144,6 @@ function makeMap(){
         mapVar: AmCharts.maps.usaHigh,
         getAreasFromMap:true,
 
-        // areas: [{id:"US-AK", description: descriptionAK},{id:"US-AL", description: descriptionAL},{id:"US-AR", description: descriptionAR},{id:"US-AZ", description: descriptionAZ},{id:"US-CA"},{id:"US-CO"},{id:"US-CT"},{id:"US-DC"},{id:"US-DE"},{id:"US-FL"},{id:"US-GA"},{id:"US-HI"},{id:"US-IA"},{id:"US-ID"},{id:"US-IL"},{id:"US-IN"},{id:"US-KS"},{id:"US-KY"},{id:"US-LA"},{id:"US-MA"},{id:"US-MD"},{id:"US-ME"},{id:"US-MI"},{id:"US-MN"},{id:"US-MO"},{id:"US-MS"},{id:"US-MT"},{id:"US-NC"},{id:"US-ND"},{id:"US-NE"},{id:"US-NH"},{id:"US-NJ"},{id:"US-NM"},{id:"US-NV"},{id:"US-NY"},{id:"US-OH"},{id:"US-OK"},{id:"US-OR"},{id:"US-PA"},{id:"US-RI"},{id:"US-SC"},{id:"US-SD"},{id:"US-TN"},{id:"US-TX"},{id:"US-UT"},{id:"US-VA"},{id:"US-VT"},{id:"US-WA"},{id:"US-WI"},{id:"US-WV"},{id:"US-WY"}],
-
         areas: areasArray,
 
         zoomLevel: 1,
@@ -165,7 +173,6 @@ function makeMap(){
     // write the map to container div
     map.write("mapdiv");
 
-
     $('#mapdiv').click(mapClick);
 }
 
@@ -175,5 +182,7 @@ AmCharts.ready(function() {
     // $("#mapdiv").click(mapClick);
     // call stateInfo function
     stateInfo();
+
+    getOilPrice();
 
 });
