@@ -173,7 +173,7 @@ function makeMap(){
     // write the map to container div
     map.write("mapdiv");
 
-    $('#mapdiv').click(mapClick);
+    // $('#mapdiv').click(mapClick);
 }
 
 // add all your code to this method, as this will ensure that page is loaded
@@ -182,7 +182,7 @@ AmCharts.ready(function() {
     // $("#mapdiv").click(mapClick);
     // call stateInfo function
     stateInfo();
-
+    $('#mapdiv').on('click', '#calc-button', mapClick);
     getOilPrice();
 
 });
