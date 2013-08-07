@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SolarEyes</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<%= render 'navbar' %>
+
+  <div style="margin-top:50px">
+    <%= bootstrap_flash %>
+  </div>
+
+<div style="z-index: 20; position:absolute; width: 100%; text-align: center; top: 50%; margin-top: -150px;">
+  <div class="myBox">
+    <div class="row">
+      <div class="col-lg-4 col-lg-offset-4" id="container" style="display: inline-block;";>
+        <div class="welcome">
+          <div class="row" >
+
+            <%= yield %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<%= render 'footer' %>
+
+
+</body>
+</html>
