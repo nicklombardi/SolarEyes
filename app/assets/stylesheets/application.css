@@ -33,3 +33,25 @@ body {
   background-image: -webkit-radial-gradient(center top, circle farthest-side, #73B7EB 0%, #3277BA 90%);
   background-image: radial-gradient(circle farthest-side at center top, #73B7EB 0%, #3277BA 90%);
 }
+
+.welcome
+{
+   font-size:16px;
+   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+   background-color:#FFFFFF;
+   border-style:solid;
+   border-color:#DADADA;
+   border-width:1px;
+   color:#333333;
+   opacity: .8;
+   border-radius: 3px;
+   padding:15px;
+   cursor: pointer;
+   text-align:justify;
+}
+
+.erb-image-wrapper img{
+    max-width:100% !important;
+    height:auto;
+    display:block;
+}

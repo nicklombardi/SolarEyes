@@ -30,7 +30,7 @@ var n = this,
 // function to grab json data from #index action in home_controller.rb
 function stateInfo() {
     $.ajax({
-        url: '/',
+        url: '/home',
         dataType: 'json',
         data: 'GET'
     }).done(function(data){

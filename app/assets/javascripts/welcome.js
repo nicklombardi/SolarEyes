@@ -1,3 +1,5 @@
+$(document).ready(function() {
+
 $(".myBox").click(function(){
      window.location=$(this).find("a").attr("href");
      return false;
@@ -13,7 +15,6 @@ $(".welcome").mouseleave(function(){
 
 
 // change welcome to body to do for all pages
-$(document).ready(function() {
 
 $('body').css('display', 'none');
 
