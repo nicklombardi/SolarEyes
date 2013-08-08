@@ -43,5 +43,12 @@ $(document).ready(function() {
     $(".welcome").fadeTo("fast",.8);
   });
 
+  $(".logo").mouseenter(function(){
+    $(".logo").fadeTo("fast",1);
+  });
+
+  $(".logo").mouseleave(function(){
+    $(".logo").fadeTo("fast",.8);
+  });
 
   });
