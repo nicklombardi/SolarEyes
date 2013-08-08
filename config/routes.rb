@@ -14,6 +14,7 @@ SolarEyes::Application.routes.draw do
 
   get "/get_oil_price" => "home#get_oil_price"
 
+  resources :contact
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
