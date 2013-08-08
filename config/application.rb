@@ -60,5 +60,8 @@ module SolarEyes
     config.assets.version = '1.0'
 
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
+
+    config.middleware.use Rack::GoogleAnalytics, :tracker => 'UA-43048107-1'
+
   end
 end

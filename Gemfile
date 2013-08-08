@@ -27,6 +27,8 @@ gem 'factory_girl_rails'
 
 gem 'devise'
 
+gem 'rack-google-analytics'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
