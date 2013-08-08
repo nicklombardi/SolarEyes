@@ -2,6 +2,9 @@
 // var SolarEyes = {
 //     areasArray: [],
 //     originalTableData: [],
+//     input,
+//     oilBarrels,
+//     oilPrice,
 //     stateInfo: function () {
 //         $.ajax({
 //             url: '/home',
@@ -23,7 +26,7 @@ var input = "";
 
 var oilBarrels = "";
 
-var oil_price = "";
+var oilPrice = "";
 
 if (typeof Object.create !== 'function') {
   Object.create = function(o) {
@@ -65,7 +68,7 @@ function getOilPrice() {
         data: 'GET'
     }).done(function(data){
         console.log("get oil price data: " + data);
-        oil_price = data;
+        oilPrice = data;
     });
 }
 
@@ -100,7 +103,7 @@ function mapClick(){
     }
 
     console.log("user input: " + input);
-    console.log("oil price: " + oil_price);
+    console.log("oil price: " + oilPrice);
 
     stateAbbreviation = $(".state-abbreviation").attr("id");
     // Even do this for iterator increments like 'k'
@@ -115,7 +118,7 @@ function mapClick(){
     calculation = input * stateBarrels;
     $('#barrels-display').text(calculation.toFixed(2));
 
-    oilCalculation = input * stateBarrels * oil_price;
+    oilCalculation = input * stateBarrels * oilPrice;
     $('#oil-value').text(oilCalculation.formatMoney(2, '.', ','));
 
     // //circles
