@@ -88,8 +88,6 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    mail_form (1.4.1)
-      actionmailer (~> 3.0)
     meta_request (0.2.7)
       callsite
       rack-contrib
@@ -203,7 +201,6 @@ DEPENDENCIES
   factory_girl_rails
   jasmine
   jquery-rails
-  mail_form
   meta_request
   pg
   pry-debugger
