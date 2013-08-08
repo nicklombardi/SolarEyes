@@ -5,11 +5,10 @@ require File.expand_path('../application', __FILE__)
 SolarEyes::Application.initialize!
 
 ActionMailer::Base.smtp_settings = {
-  :address        => 'smtp.sendgrid.net',
-  :port           => '587',
+  :address => "smtp.sendgrid.net",
+  :port => 25,
+  :domain => "solarey.es",
   :authentication => :plain,
-  :user_name      => ENV['app17329511@heroku.com'],
-  :password       => ENV['3hqxdrub'],
-  :domain         => 'solareyes.herokuapp.com',
-  :enable_starttls_auto => true
+  :user_name => "app17329511@heroku.com",
+  :password => "3hqxdrub"
 }
