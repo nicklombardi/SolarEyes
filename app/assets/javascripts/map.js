@@ -1,20 +1,3 @@
-// TODO Get everything inside ONE big object for your app
-// var SolarEyes = {
-//     areasArray: [],
-//     originalTableData: [],
-//     stateInfo: function () {
-//         $.ajax({
-//             url: '/home',
-//             dataType: 'json',
-//             data: 'GET'
-//         }).done(function(data){
-//             console.log(data);
-//             createAreas(data);
-//             saveOriginalTableData(data);
-//         });
-//     }
-// };
-
 // global variables
 var areasArray = [];
 var originalTableData = [];
@@ -33,7 +16,6 @@ if (typeof Object.create !== 'function') {
   };
 }
 
-// TODO Better variable names here
 Number.prototype.formatMoney = function(c, d, t){
 var n = this,
     c = isNaN(c = Math.abs(c)) ? 2 : c,
@@ -80,16 +62,6 @@ function enterKey(){
 
 // function intended for when user clicks on calculate button
 function mapClick(){
-    // TODO declare all variables used in a function
-    // At the top of the function, even if their values are defined later
-
-    // Also use a single var pattern
-    var stateBarrels,
-        stateAbbreviation,
-        k,
-        originalTableDataLength,
-        calculation,
-        oilCalculation;
 
     console.log('map clicked');
 
@@ -102,47 +74,21 @@ function mapClick(){
     console.log("user input: " + input);
     console.log("oil price: " + oil_price);
 
-    stateAbbreviation = $(".state-abbreviation").attr("id");
-    // Even do this for iterator increments like 'k'
-    // Calaculate conditional max outside of loop
-    originalTableDataLength = originalTableData.length;
-    for (k = 0; k < originalTableDataLength; k++) {
+    var stateAbbreviation = $(".state-abbreviation").attr("id");
+    var stateBarrels;
+    for (var k = 0; k < originalTableData.length; k++) {
         if (originalTableData[k].id === stateAbbreviation) {
             stateBarrels = originalTableData[k].description;
         }
     }
 
-    calculation = input * stateBarrels;
+    var calculation = input * stateBarrels;
     $('#barrels-display').text(calculation.toFixed(2));
 
-    oilCalculation = input * stateBarrels * oil_price;
+    var oilCalculation = input * stateBarrels * oil_price;
     $('#oil-value').text(oilCalculation.formatMoney(2, '.', ','));
 
     //circles
-    var w = 500;
-    var h = 50;
-
-    //Data
-    var dataset = [ 5, 10, 15, 20, 25 ];
-
-    //Create SVG element
-    var svg = d3.select("#append_here")
-                .append("svg")
-                .attr("width", 500)
-                .attr("height", 50);
-
-    var circles = svg.selectAll("circle")
-        .data(dataset)
-        .enter()
-        .append("circle");
-
-    circles.attr("cx", function(d, i) {
-                return (i * 50) + 25;
-            })
-           .attr("cy", h/2)
-           .attr("r", function(d) {
-                return d;
-           });
 
 }
 
