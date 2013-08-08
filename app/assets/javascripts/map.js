@@ -65,7 +65,7 @@ function mapClick(){
 
     console.log('map clicked');
 
-    if ($('#installs').val()) {
+    if ($('#installs').val() && ($('#installs').val() > 0)) {
         input = $('#installs').val();
     } else {
         input = 0;
