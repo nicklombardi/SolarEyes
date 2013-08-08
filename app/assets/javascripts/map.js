@@ -118,31 +118,31 @@ function mapClick(){
     oilCalculation = input * stateBarrels * oil_price;
     $('#oil-value').text(oilCalculation.formatMoney(2, '.', ','));
 
-    //circles
-    var w = 500;
-    var h = 50;
+    // //circles
+    // var w = 500;
+    // var h = 50;
 
-    //Data
-    var dataset = [ 5, 10, 15, 20, 25 ];
+    // //Data
+    // var dataset = [ 5, 10, 15, 20, 25 ];
 
-    //Create SVG element
-    var svg = d3.select("#append_here")
-                .append("svg")
-                .attr("width", 500)
-                .attr("height", 50);
+    // //Create SVG element
+    // var svg = d3.select("#append_here")
+    //             .append("svg")
+    //             .attr("width", 500)
+    //             .attr("height", 50);
 
-    var circles = svg.selectAll("circle")
-        .data(dataset)
-        .enter()
-        .append("circle");
+    // var circles = svg.selectAll("circle")
+    //     .data(dataset)
+    //     .enter()
+    //     .append("circle");
 
-    circles.attr("cx", function(d, i) {
-                return (i * 50) + 25;
-            })
-           .attr("cy", h/2)
-           .attr("r", function(d) {
-                return d;
-           });
+    // circles.attr("cx", function(d, i) {
+    //             return (i * 50) + 25;
+    //         })
+    //        .attr("cy", h/2)
+    //        .attr("r", function(d) {
+    //             return d;
+    //        });
 
 }
 
@@ -154,8 +154,13 @@ var area = {
 
 // function readies areas attribute of var dataProvider in makeMap function
 function createAreas(data) {
-    for (var j = 0; j < data.length; j++) {
-        var newArea = Object.create(area);
+    var j,
+        newArea,
+        createAreasDataLength;
+
+    createAreasDataLength = data.length;
+    for (j = 0; j < createAreasDataLength; j++) {
+        newArea = Object.create(area);
         newArea.id = data[j].state_name;
         // based on Arizona
         newArea.description = '<div class="input-group"><span class="input-group-addon"><span class="glyphicons glyphicon-sun" style="color:#FFCC21"></span> &nbsp;</span><input type="number" class="form-control" autofocus="true" placeholder="installs" id="installs"><span class="input-group-btn"><button class="btn btn-primary" type="button" id="calc-button">Calculate</button></span></div><p style="line-height:"3px"> </p><span class="glyphicon glyphicon-tint"></span> barrels saved annually: <span id="barrels-display"> '+ input +' </span><br><span class="glyphicon glyphicon-usd" style="color#00AB01"></span> value: <span id="oil-value"></span><span class="state-abbreviation" id=' + data[j].state_name + '></span>';
@@ -165,8 +170,13 @@ function createAreas(data) {
 }
 
 function saveOriginalTableData(data) {
-    for (var i = 0; i < data.length; i ++) {
-        var newTableData = Object.create(area);
+    var i,
+        newTableData,
+        saveOriginalTableDataLength;
+
+    saveOriginalTableDataLength = data.length;
+    for (i = 0; i < saveOriginalTableDataLength; i ++) {
+        newTableData = Object.create(area);
         newTableData.id += data[i].state_name;
         newTableData.description += data[i].barrels_of_oil_per_year;
         originalTableData.push(newTableData);
@@ -175,8 +185,11 @@ function saveOriginalTableData(data) {
 
 // content of this function originally inside amCharts.ready function
 function makeMap(){
+    var map,
+        dataProvider;
+
      // create AmMap object
-    var map = new AmCharts.AmMap();
+    map = new AmCharts.AmMap();
 
     fitMapToContainer = true;
     // set path to images
@@ -204,7 +217,7 @@ function makeMap(){
      in case you don't set it to true, all the areas except listed in data
      provider will be treated as unlisted.
     */
-    var dataProvider = {
+    dataProvider = {
         mapVar: AmCharts.maps.usaHigh,
         getAreasFromMap:true,
 
