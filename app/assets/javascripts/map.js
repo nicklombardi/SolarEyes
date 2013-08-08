@@ -5,6 +5,9 @@ var solarEyes = {
     input: "",
     oilBarrels: "",
     oilPrice: "",
+    width: "",
+    height: "",
+    gradient: "",
     stateInfo: function () {
         // function to grab JSON data from #index action in home_controller.rb
         // calls createAreas() function after receiving JSON data and passes the data as an argument
@@ -56,7 +59,8 @@ var solarEyes = {
             k,
             originalTableDataLength,
             calculation,
-            oilCalculation;
+            oilCalculation,
+            svg;
 
         console.log('map clicked');
 
@@ -91,6 +95,59 @@ var solarEyes = {
         oilCalculation = this.input * stateBarrels * solarEyes.oilPrice;
         console.log("oilCalculation: " + oilCalculation);
         $('#oil-value').text(oilCalculation.formatMoney(2, '.', ','));
+
+        // d3 oil drop visualization
+        width = 300;
+        height = 200;
+
+        $("#d3-div").empty();
+
+        svg = d3.select("#d3-div").append("svg")
+            .attr("width", width)
+            .attr("height", height)
+          .append("g")
+            .attr("transform", "translate(" + width / 8 + "," + height / 2+ ")");
+
+        gradient = svg.append("defs").append("linearGradient")
+            .attr("id", "gradient")
+            .attr("x1", "0%")
+            .attr("y1", "20%")
+            .attr("x2", "20%")
+            .attr("y2", "100%");
+
+        gradient.append("stop")
+            .attr("offset", "20%")
+            .attr("stop-color", "#ccf");
+
+        gradient.append("stop")
+            .attr("offset", "70%")
+            .attr("stop-color", "#1C425C");
+
+        gradient.append("stop")
+            .attr("offset", "100%")
+            .attr("stop-color", "#19162B");
+
+        // could use transparent gradient overlay to vary raindrop color
+        svg.selectAll("path")
+            .data(d3.range(calculation / 30))
+          .enter().append("path")
+            .attr("fill", "url(#gradient)")
+            .attr("d", function() { return raindrop(5 + Math.random() * 5000); })
+            .attr("transform", function(d) {
+              return "translate(" + (Math.random() * width / 1.7) + ",0)";
+            });
+
+        // size is linearly proportional to square pixels (not exact, yet)
+        function raindrop(size) {
+          var r = Math.sqrt(size / Math.PI);
+          return "M" + r + ",0"
+              + "A" + r + "," + r + " 0 1,1 " + -r + ",0"
+              + "C" + -r + "," + -r + " 0," + -r + " 0," + -3*r
+              + "C0," + -r + " " + r + "," + -r + " " + r + ",0"
+              + "Z";
+        }
+
+
     },
     area: {
         // object to clone
@@ -110,7 +167,7 @@ var solarEyes = {
         for (j = 0; j < createAreasDataLength; j++) {
             newArea = Object.create(this.area);
             newArea.id = data[j].state_name;
-            newArea.description = '<div class="input-group"><span class="input-group-addon"><span class="glyphicons glyphicon-sun" style="color:#FFCC21"></span> &nbsp;</span><input type="number" class="form-control" autofocus="true" placeholder="installs" id="installs"><span class="input-group-btn"><button class="btn btn-primary" type="button" id="calc-button">Calculate</button></span></div><p style="line-height:"3px"> </p><span class="glyphicon glyphicon-tint"></span> barrels saved annually: <span id="barrels-display"> '+ this.input +' </span><br><span class="glyphicon glyphicon-usd" style="color#00AB01"></span> value: <span id="oil-value"></span><span class="state-abbreviation" id=' + data[j].state_name + '></span>';
+            newArea.description = '<div class="input-group"><span class="input-group-addon"><span class="glyphicons glyphicon-sun" style="color:#FFCC21"></span> &nbsp;</span><input type="number" class="form-control" autofocus="true" placeholder="installs" id="installs"><span class="input-group-btn"><button class="btn btn-primary" type="button" id="calc-button">Calculate</button></span></div><p style="line-height:"3px"> </p><span class="glyphicon glyphicon-tint"></span> barrels saved annually: <span id="barrels-display"> '+ this.input +' </span><br><span class="glyphicon glyphicon-usd" style="color:#00AB01"></span> value: <span id="oil-value"></span><span class="state-abbreviation" id=' + data[j].state_name + '></span><br><br><div id="d3-div"> </div>';
             this.areasArray.push(newArea);
         }
         this.makeMap();
@@ -150,7 +207,7 @@ var solarEyes = {
         map.balloon.fontSize = "20";
         map.balloon.horizontalPadding = "5";
         map.balloon.textShadowColor = "#FFFFFF";
-        map.balloon.fillAlpha = "0.8";
+        map.balloon.fillAlpha = "0.95";
         map.fontFamily = "HelveticaNeue-Light";
 
         /* create data provider object
@@ -180,8 +237,8 @@ var solarEyes = {
          */
         map.areasSettings = {
             autoZoom: true,
-            descriptionWindowY: 350,
-            descriptionWindowWidth: 280,
+            descriptionWindowY: 280,
+            descriptionWindowWidth: 310,
             descriptionWindowHeight: 330,
             rollOverOutlineColor: "#3277BA",
             selectedColor: "#60ABEB"
