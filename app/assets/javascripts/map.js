@@ -135,12 +135,12 @@ var solarEyes = {
             .transition()
             .duration(1000)
             .ease("elastic")
-            .attr("d", function() { return raindrop(5 + Math.random() * 5000); })
+            .attr("d", function() { return oildrop(1 + Math.random() * 5000); })
             .attr("transform", function(d) {
               return "translate(" + (Math.random() * width / 1.7) + ",0)";
             });
 
-        function raindrop(size) {
+        function oildrop(size) {
           var r = Math.sqrt(size / Math.PI);
           return "M" + r + ",0"
               + "A" + r + "," + r + " 0 1,1 " + -r + ",0"
@@ -238,9 +238,9 @@ var solarEyes = {
          */
         map.areasSettings = {
             autoZoom: true,
-            descriptionWindowY: 280,
-            descriptionWindowWidth: 290,
-            descriptionWindowHeight: 330,
+            descriptionWindowY: 300,
+            descriptionWindowWidth: 280,
+            descriptionWindowHeight: 335,
             rollOverOutlineColor: "#3277BA",
             selectedColor: "#60ABEB"
         };
