@@ -61,7 +61,8 @@ var solarEyes = {
             originalTableDataLength,
             calculation,
             oilCalculation,
-            svg;
+            svg,
+            d3DataArrayElementToBePushed;
 
         console.log('map clicked');
 
@@ -103,13 +104,22 @@ var solarEyes = {
 
         $("#d3-div").empty();
 
-        solarEyes.d3Data.push(calculation / 30);
+        d3DataArrayElementToBePushed = calculation / 30;
+        if (d3DataArrayElementToBePushed > 90) {
+            d3DataArrayElementToBePushed = 90;
+            solarEyes.d3Data.push(d3DataArrayElementToBePushed);
+        } else {
+            solarEyes.d3Data.push(d3DataArrayElementToBePushed);
+        }
+
+
+        // solarEyes.d3Data.push(d3DataArrayElementToBePushed);
         console.log(solarEyes.d3Data);
 
-        if (solarEyes.d3Data.slice(-1)[0] > 90){
-            solarEyes.d3Data.pop();
-            solarEyes.d3Data.push(90);
-        }
+        // if (solarEyes.d3Data.slice(-1)[0] > 90){
+        //     solarEyes.d3Data.pop();
+        //     solarEyes.d3Data.push(90);
+        // }
 
         svg = d3.select("#d3-div").append("svg")
             .attr("width", width)
