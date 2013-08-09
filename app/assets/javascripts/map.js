@@ -115,6 +115,11 @@ var solarEyes = {
         // solarEyes.d3Data.push(d3DataArrayElementToBePushed);
         console.log(solarEyes.d3Data);
 
+        var startVal = solarEyes.d3Data.slice(-2)[0];
+        var endVal = solarEyes.d3Data.slice(-1)[0];
+
+        console.log('startVal: ' + startVal + '/ endVal: ' + endVal);
+
         svg = d3.select("#d3-div").append("svg")
             .attr("width", width)
             .attr("height", height)
@@ -142,7 +147,7 @@ var solarEyes = {
 
         // declare start value and transition to input value for animation
         svg.selectAll("path")
-            .data(d3.range(solarEyes.d3Data.slice(-1)[0]))
+            .data(d3.range(endVal))
             .enter().append("path")
             .attr("fill", "url(#gradient)")
             .transition()
@@ -161,6 +166,33 @@ var solarEyes = {
               + "C0," + -r + " " + r + "," + -r + " " + r + ",0"
               + "Z";
         }
+
+        d3.select("#d3-div")
+            .on("mouseover", function() {
+            console.log("tween animation");
+            svg.selectAll("path")
+            .data(d3.range(endVal))
+            .transition()
+            .duration(2000)
+            .each("start", function() {  // <-- Executes at start of transition
+               d3.select(this)
+               .attr("fill", "url(#gradient)");
+            })
+            .ease("elastic")
+            .attr("d", function() { return oildrop(Math.random() * 4500); })
+            .attr("transform", function(d) {
+              return "translate(" + (Math.random() * width / 1.6) + ",10)";
+            });
+
+        function oildrop(size) {
+          var r = Math.sqrt(size / Math.PI);
+          return "M" + r + ",0"
+              + "A" + r + "," + r + " 0 1,1 " + -r + ",0"
+              + "C" + -r + "," + -r + " 0," + -r + " 0," + -3*r
+              + "C0," + -r + " " + r + "," + -r + " " + r + ",0"
+              + "Z";
+        }
+        });
 
     },
     area: {
