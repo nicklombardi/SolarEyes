@@ -209,6 +209,7 @@ if (typeof Object.create !== 'function') {
 }
 
 // TODO Better variable names here
+// This is from StackOverflow to format numbers with commas, no idea what the variables actually are
 Number.prototype.formatMoney = function(c, d, t){
 var n = this,
     c = isNaN(c = Math.abs(c)) ? 2 : c,
