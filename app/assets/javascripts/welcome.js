@@ -3,7 +3,7 @@ $(document).ready(function() {
 
   $(".myBox").click(function(event){
       event.preventDefault();
-      newLocation = "/home"
+      newLocation = "/home";
       $('body').fadeOut(500, newpage);
   });
 

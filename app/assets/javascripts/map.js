@@ -8,6 +8,7 @@ var solarEyes = {
     width: "",
     height: "",
     gradient: "",
+    d3Data: [],
     stateInfo: function () {
         // function to grab JSON data from #index action in home_controller.rb
         // calls createAreas() function after receiving JSON data and passes the data as an argument
@@ -89,7 +90,7 @@ var solarEyes = {
         // updates text value of element in DOM
         calculation = this.input * stateBarrels;
         console.log("calculation: " + calculation);
-        $('#barrels-display').text(calculation.toFixed(2));
+        $('#barrels-display').text(calculation.formatMoney(2, '.', ','));
 
         // updates text value of element in DOM
         oilCalculation = this.input * stateBarrels * solarEyes.oilPrice;
@@ -97,16 +98,24 @@ var solarEyes = {
         $('#oil-value').text(oilCalculation.formatMoney(2, '.', ','));
 
         // d3 oil drop visualization
-        width = 280;
+        width = 290;
         height = 200;
 
         $("#d3-div").empty();
+
+        solarEyes.d3Data.push(calculation / 30);
+        console.log(solarEyes.d3Data);
+
+        if (solarEyes.d3Data.slice(-1)[0] > 90){
+            solarEyes.d3Data.pop();
+            solarEyes.d3Data.push(90);
+        }
 
         svg = d3.select("#d3-div").append("svg")
             .attr("width", width)
             .attr("height", height)
             .append("g")
-            .attr("transform", "translate(" + width / 8 + "," + height / 2+ ")");
+            .attr("transform", "translate(" + width / 8 + "," + height / 2.3 + ")");
 
         gradient = svg.append("defs").append("linearGradient")
             .attr("id", "gradient")
@@ -129,15 +138,15 @@ var solarEyes = {
 
         // declare start value and transition to input value for animation
         svg.selectAll("path")
-            .data(d3.range(calculation / 30))
+            .data(d3.range(solarEyes.d3Data.slice(-1)[0]))
             .enter().append("path")
             .attr("fill", "url(#gradient)")
             .transition()
             .duration(1000)
             .ease("elastic")
-            .attr("d", function() { return oildrop(1 + Math.random() * 5000); })
+            .attr("d", function() { return oildrop(Math.random() * 4500); })
             .attr("transform", function(d) {
-              return "translate(" + (Math.random() * width / 1.7) + ",0)";
+              return "translate(" + (Math.random() * width / 1.6) + ",10)";
             });
 
         function oildrop(size) {
@@ -168,7 +177,7 @@ var solarEyes = {
         for (j = 0; j < createAreasDataLength; j++) {
             newArea = Object.create(this.area);
             newArea.id = data[j].state_name;
-            newArea.description = '<div class="input-group"><span class="input-group-addon"><span class="glyphicons glyphicon-sun" style="color:#FFCC21"></span> &nbsp;</span><input type="number" class="form-control" autofocus="true" placeholder="installs" id="installs"><span class="input-group-btn"><button class="btn btn-primary" type="button" id="calc-button">Calculate</button></span></div><p style="line-height:"3px"> </p><span class="glyphicon glyphicon-tint"></span> barrels saved annually: <span id="barrels-display"> '+ this.input +' </span><br><span class="glyphicon glyphicon-usd" style="color:#00AB01"></span> value: <span id="oil-value"></span><span class="state-abbreviation" id=' + data[j].state_name + '></span><br><br><div id="d3-div"> </div>';
+            newArea.description = '<div class="input-group"><span class="input-group-addon"><span class="glyphicons glyphicon-sun" style="color:#FFCC21"></span> &nbsp;</span><input type="number" class="form-control" autofocus="true" placeholder="installs" id="installs"><span class="input-group-btn"><button class="btn btn-primary" type="button" id="calc-button">Calculate</button></span></div><p style="line-height:"3px"> </p><span class="glyphicon glyphicon-tint"></span> barrels saved/year: <span id="barrels-display"> '+ this.input +' </span><br><span class="glyphicon glyphicon-usd" style="color:#00AB01"></span> value: <span id="oil-value"></span><span class="state-abbreviation" id=' + data[j].state_name + '></span><br><br><div id="d3-div"> </div>';
             this.areasArray.push(newArea);
         }
         this.makeMap();
@@ -239,7 +248,7 @@ var solarEyes = {
         map.areasSettings = {
             autoZoom: true,
             descriptionWindowY: 300,
-            descriptionWindowWidth: 280,
+            descriptionWindowWidth: 275,
             descriptionWindowHeight: 335,
             rollOverOutlineColor: "#3277BA",
             selectedColor: "#60ABEB"
