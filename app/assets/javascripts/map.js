@@ -108,8 +108,8 @@ var solarEyes = {
         console.log(solarEyes.d3Data);
 
         if (solarEyes.d3Data.slice(-1)[0] > 90){
-            solarEyes.d3Data.pop();
             solarEyes.d3Data.push(90);
+            solarEyes.d3Data.pop();
         }
 
         svg = d3.select("#d3-div").append("svg")
