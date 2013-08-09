@@ -40,16 +40,15 @@ var solarEyes = {
             that.oilPrice = data;
         });
     },
-    enterKey: function () {
+    enterKey: function (e) {
         // function lets user hit 'enter' key to submit desired input value
         // called by event listener when the map loads
 
-        $("#installs").keyup(function (e) {
-            if (e.keyCode == 13) {
+            if (e.which == 13) {
                 console.log("enter key pressed");
                 solarEyes.mapClick();
             }
-        });
+
     },
     mapClick: function () {
         // function for when user clicks on calculate button
@@ -57,23 +56,25 @@ var solarEyes = {
 
         var stateBarrels,
             stateAbbreviation,
-            k,
             originalTableDataLength,
             calculation,
             oilCalculation,
-            svg;
+            svg,
+            installVal;
 
         console.log('map clicked');
 
         // if else statement to handle invalid user input
         // assigns user input as value to variable input
-        if ($('#installs').val() && ($('#installs').val() > 0)) {
-            this.input = $('#installs').val();
+        installVal = parseInt($('#installs').val(), 10);
+        if (installVal > 0) {
+            solarEyes.input = installVal;
+            console.log(solarEyes.input);
         } else {
-            this.input = 0;
+            solarEyes.input = 0;
         }
 
-        console.log("user input: " + this.input);
+        console.log("user input: " + solarEyes.input);
         console.log("oil price: " + solarEyes.oilPrice);
 
         // assigns id attribute of the state that the user clicked on to variable stateAbbreviation
@@ -81,19 +82,19 @@ var solarEyes = {
 
         // assigns value of variable stateBarrels to be equal to the number of barrels of oil (misleadingly named 'description') of the object in originalTableData array whose id is the same as stateAbbreviation
         originalTableDataLength = solarEyes.originalTableData.length;
-        for (k = 0; k < originalTableDataLength; k++) {
+        for (var k = 0; k < originalTableDataLength; k++) {
             if (solarEyes.originalTableData[k].id === stateAbbreviation) {
                 stateBarrels = solarEyes.originalTableData[k].description;
             }
         }
 
         // updates text value of element in DOM
-        calculation = this.input * stateBarrels;
+        calculation = solarEyes.input * stateBarrels;
         console.log("calculation: " + calculation);
         $('#barrels-display').text(calculation.formatMoney(2, '.', ','));
 
         // updates text value of element in DOM
-        oilCalculation = this.input * stateBarrels * solarEyes.oilPrice;
+        oilCalculation = solarEyes.input * stateBarrels * solarEyes.oilPrice;
         console.log("oilCalculation: " + oilCalculation);
         $('#oil-value').text(oilCalculation.formatMoney(2, '.', ','));
 
@@ -296,6 +297,6 @@ AmCharts.ready(function() {
 
     // event listeners
     $('#mapdiv').on('click', '#calc-button', solarEyes.mapClick);
-    $('#mapdiv').on('keyup', solarEyes.enterKey);
+    $('#mapdiv').on('keyup', '#installs', solarEyes.enterKey);
 
 });
