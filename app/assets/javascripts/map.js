@@ -97,7 +97,7 @@ var solarEyes = {
         $('#oil-value').text(oilCalculation.formatMoney(2, '.', ','));
 
         // d3 oil drop visualization
-        width = 300;
+        width = 280;
         height = 200;
 
         $("#d3-div").empty();
@@ -105,7 +105,7 @@ var solarEyes = {
         svg = d3.select("#d3-div").append("svg")
             .attr("width", width)
             .attr("height", height)
-          .append("g")
+            .append("g")
             .attr("transform", "translate(" + width / 8 + "," + height / 2+ ")");
 
         gradient = svg.append("defs").append("linearGradient")
@@ -127,17 +127,19 @@ var solarEyes = {
             .attr("offset", "100%")
             .attr("stop-color", "#19162B");
 
-        // could use transparent gradient overlay to vary raindrop color
+        // declare start value and transition to input value for animation
         svg.selectAll("path")
             .data(d3.range(calculation / 30))
-          .enter().append("path")
+            .enter().append("path")
             .attr("fill", "url(#gradient)")
+            .transition()
+            .duration(1000)
+            .ease("elastic")
             .attr("d", function() { return raindrop(5 + Math.random() * 5000); })
             .attr("transform", function(d) {
               return "translate(" + (Math.random() * width / 1.7) + ",0)";
             });
 
-        // size is linearly proportional to square pixels (not exact, yet)
         function raindrop(size) {
           var r = Math.sqrt(size / Math.PI);
           return "M" + r + ",0"
@@ -146,7 +148,6 @@ var solarEyes = {
               + "C0," + -r + " " + r + "," + -r + " " + r + ",0"
               + "Z";
         }
-
 
     },
     area: {
@@ -207,7 +208,7 @@ var solarEyes = {
         map.balloon.fontSize = "20";
         map.balloon.horizontalPadding = "5";
         map.balloon.textShadowColor = "#FFFFFF";
-        map.balloon.fillAlpha = "0.95";
+        map.balloon.fillAlpha = "0.8";
         map.fontFamily = "HelveticaNeue-Light";
 
         /* create data provider object
@@ -238,7 +239,7 @@ var solarEyes = {
         map.areasSettings = {
             autoZoom: true,
             descriptionWindowY: 280,
-            descriptionWindowWidth: 310,
+            descriptionWindowWidth: 290,
             descriptionWindowHeight: 330,
             rollOverOutlineColor: "#3277BA",
             selectedColor: "#60ABEB"
