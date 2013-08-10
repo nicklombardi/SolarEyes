@@ -169,12 +169,39 @@ var solarEyes = {
 
         d3.select("#d3-div")
             .on("mouseover", function() {
-            console.log("tween animation");
+            console.log("mouseover animation");
             svg.selectAll("path")
             .data(d3.range(endVal))
             .transition()
             .duration(2000)
-            .each("start", function() {  // <-- Executes at start of transition
+            .each("start", function() {
+               d3.select(this)
+               .attr("fill", "url(#gradient)");
+            })
+            .ease("elastic")
+            .attr("d", function() { return oildrop(Math.random() * 4500); })
+            .attr("transform", function(d) {
+              return "translate(" + (Math.random() * width / 1.6) + ",10)";
+            });
+
+            function oildrop(size) {
+          var r = Math.sqrt(size / Math.PI);
+          return "M" + r + ",0"
+              + "A" + r + "," + r + " 0 1,1 " + -r + ",0"
+              + "C" + -r + "," + -r + " 0," + -r + " 0," + -3*r
+              + "C0," + -r + " " + r + "," + -r + " " + r + ",0"
+              + "Z";
+        }
+        });
+
+        d3.select("#calc-button")
+            .on("click", function() {
+            console.log("click animation");
+            svg.selectAll("path")
+            .data(d3.range(endVal))
+            .transition()
+            .duration(2000)
+            .each("start", function() {
                d3.select(this)
                .attr("fill", "url(#gradient)");
             })
