@@ -8,9 +8,11 @@ SolarEyes::Application.routes.draw do
 
   root :to => 'welcome#index'
 
-  resources :home, only: [:index, :show]
+  resources :home, only: [:index]
 
-  resources :welcome, only: [:index, :show]
+  resources :welcome, only: [:index]
+
+  resources :data, only: [:index]
 
   get "/get_oil_price" => "home#get_oil_price"
 

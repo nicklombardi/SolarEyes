@@ -299,9 +299,9 @@ var solarEyes = {
 
             areas: this.areasArray,
 
-            zoomLevel: 1,
-            zoomLongitude: 18,
-            zoomLatitude: 30
+            zoomLevel: .6,
+            zoomLongitude: 150,
+            zoomLatitude: -80
         };
 
         /* create areas settings
@@ -313,7 +313,8 @@ var solarEyes = {
             descriptionWindowY: 300,
             descriptionWindowWidth: 275,
             descriptionWindowHeight: 335,
-            rollOverOutlineColor: "#3277BA",
+            rollOverColor: "#60ABEB",
+            rollOverOutlinecolor: "#3277BA",
             selectedColor: "#60ABEB"
         };
 
