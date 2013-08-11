@@ -304,7 +304,7 @@ var solarEyes = {
             zoomLatitude: -80
         };
 
-        /* create areas settings
+        /* create area settings
          * autoZoom set to true means that the map will zoom-in when clicked on the area
          * selectedColor indicates color of the clicked area.
          */
