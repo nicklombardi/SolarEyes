@@ -22,6 +22,13 @@ describe("solarEyes", function () {
     //Test stateInfo()
     describe("stateInfo", function () {
         //this is fine
+        it("should be called", function () {
+            spyOn(solarEyes, "stateInfo");
+            solarEyes.stateInfo();
+            expect(solarEyes.stateInfo).toHaveBeenCalled();
+        });
+
+        //this is fine
         it("should make an AJAX request", function () {
             function fakeAjaxRequest () {
                 $.ajax({
@@ -49,6 +56,18 @@ describe("solarEyes", function () {
     //Test getOilPrice()
     describe("getOilPrice", function () {
         //this is fine
+        it("should be called", function () {
+            spyOn(solarEyes, "getOilPrice");
+            solarEyes.getOilPrice();
+            expect(solarEyes.getOilPrice).toHaveBeenCalled();
+        });
+
+        //this is fine
+        it("should not affect the value of oilPrice before being called", function () {
+            expect(solarEyes.oilPrice).toBeFalsy();
+        });
+
+        //this is fine
         it("should make an AJAX request", function () {
             function fakeAjaxRequest () {
                 $.ajax({
@@ -63,9 +82,6 @@ describe("solarEyes", function () {
             expect($.ajax.mostRecentCall.args[0]["url"]).toEqual("/get_oil_price");
         });
 
-        it("should assign a value to oilPrice", function () {
-            expect(solarEyes.oilPrice).toBeTruthy();
-        });
     });
     //Test enterKey()
     //this is fine
@@ -80,10 +96,9 @@ describe("solarEyes", function () {
     });
     //Test mapClick()
     describe("mapClick", function () {
-        it("should assign a value to input", function () {
+        //this is fine
+        it("should not affect the value of input before being called", function () {
             expect(solarEyes.input).toBeFalsy();
-            solarEyes.mapClick();
-            expect(solarEyes.input).toBeTruthy();
         });
     });
     //Test createAreas()
@@ -120,6 +135,7 @@ describe("solarEyes", function () {
 });
 
 //Test AmCharts
+//Capybara??
 describe("AmCharts", function () {
 
     it("should call stateInfo()", function () {
