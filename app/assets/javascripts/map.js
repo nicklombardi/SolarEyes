@@ -44,10 +44,10 @@ var solarEyes = {
         // function lets user hit 'enter' key to submit desired input value
         // called by event listener when the map loads
 
-            if (e.which == 13) {
-                console.log("enter key pressed");
-                solarEyes.mapClick();
-            }
+        if (e.which == 13) {
+            console.log("enter key pressed");
+            solarEyes.mapClick();
+        }
 
     },
     mapClick: function () {
