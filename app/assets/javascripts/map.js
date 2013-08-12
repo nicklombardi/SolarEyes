@@ -315,7 +315,7 @@ var solarEyes = {
             descriptionWindowHeight: 335,
             rollOverColor: "#60ABEB",
             rollOverOutlinecolor: "#3277BA",
-            selectedColor: "#60ABEB"
+            selectedColor: "#60ABEB",
         };
 
         // pass data provider to the map object
