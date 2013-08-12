@@ -51,6 +51,22 @@ body {
    text-align:justify;
 }
 
+.data
+{
+   font-size:16px;
+   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+   background-color:#FFFFFF;
+   border-style:solid;
+   border-color:#DADADA;
+   border-width:1px;
+   color:#333333;
+   opacity: .8;
+   border-radius: 3px;
+   padding:25px;
+   cursor: pointer;
+   text-align:justify;
+}
+
 .devise
 {
    font-size:16px;

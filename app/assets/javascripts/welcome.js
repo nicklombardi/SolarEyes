@@ -7,6 +7,18 @@ $(document).ready(function() {
       $('body').fadeOut(500, newpage);
   });
 
+  $(".pvwatts").click(function(event){
+      event.preventDefault();
+      newLocation = "http://www.nrel.gov/rredc/pvwatts/";
+      $('body').fadeOut(500, newpage);
+  });
+
+  $(".cleantechnica").click(function(event){
+      event.preventDefault();
+      newLocation = "http://cleantechnica.com/2012/10/08/average-size-of-solar-in-the-united-states-small/";
+      $('body').fadeOut(500, newpage);
+  });
+
   $(".welcome").mouseenter(function(){
     $(".welcome").fadeTo("fast",1);
   });
@@ -21,6 +33,14 @@ $(document).ready(function() {
 
   $(".logo").mouseleave(function(){
     $(".logo").fadeTo("fast",.8);
+  });
+
+  $(".data").mouseenter(function(){
+    $(".data").fadeTo("fast",1);
+  });
+
+  $(".data").mouseleave(function(){
+    $(".data").fadeTo("fast",.8);
   });
 
 
