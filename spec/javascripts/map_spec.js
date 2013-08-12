@@ -1,4 +1,5 @@
 //Test the Object.create method
+//this is fine
 describe("Object", function () {
     it("should have a create method to duplicate objects", function () {
         var o = {name: "team purple octopodes"};
@@ -8,6 +9,7 @@ describe("Object", function () {
 });
 
 //Test the Number.prototype.formatMoney method
+//this is fine
 describe("Number.prototype", function () {
     it("should have a formatMoney method to format a number to include commas and decimal places where appropriate for US currency", function () {
         var num = 4500;
@@ -19,38 +21,84 @@ describe("Number.prototype", function () {
 describe("solarEyes", function () {
     //Test stateInfo()
     describe("stateInfo", function () {
-        it("should make an AJAX request", function () {
+        //this is fine
+        it("should be called", function () {
+            spyOn(solarEyes, "stateInfo");
+            solarEyes.stateInfo();
+            expect(solarEyes.stateInfo).toHaveBeenCalled();
+        });
 
+        //this is fine
+        it("should make an AJAX request", function () {
+            function fakeAjaxRequest () {
+                $.ajax({
+                url: '/home',
+                dataType: 'json',
+                data: 'GET'
+                });
+            }
+
+            spyOn($, "ajax");
+            fakeAjaxRequest();
+            expect($.ajax.mostRecentCall.args[0]["url"]).toEqual("/home");
         });
 
         it("should call createAreas()", function () {
-
+            spyOn(solarEyes, "createAreas");
+            expect(solarEyes.createAreas).toHaveBeenCalled();
         });
 
         it("should call saveOriginalTableData()", function () {
-
+            spyOn(solarEyes, "saveOriginalTableData");
+            expect(solarEyes.saveOriginalTableData).toHaveBeenCalled();
         });
     });
     //Test getOilPrice()
     describe("getOilPrice", function () {
+        //this is fine
+        it("should be called", function () {
+            spyOn(solarEyes, "getOilPrice");
+            solarEyes.getOilPrice();
+            expect(solarEyes.getOilPrice).toHaveBeenCalled();
+        });
+
+        //this is fine
+        it("should not affect the value of oilPrice before being called", function () {
+            expect(solarEyes.oilPrice).toBeFalsy();
+        });
+
+        //this is fine
         it("should make an AJAX request", function () {
+            function fakeAjaxRequest () {
+                $.ajax({
+                url: '/get_oil_price',
+                dataType: 'json',
+                data: 'GET'
+                });
+            }
 
+            spyOn($, "ajax");
+            fakeAjaxRequest();
+            expect($.ajax.mostRecentCall.args[0]["url"]).toEqual("/get_oil_price");
         });
 
-        it("should assign a value to oilPrice", function () {
-
-        });
     });
     //Test enterKey()
+    //this is fine
     describe("enterKey", function () {
         it("should call mapClick()", function () {
-
+            spyOn(solarEyes, "mapClick");
+            var e = $.Event("keyup");
+            e.which = 13;
+            $("#installs").trigger(solarEyes.enterKey(e));
+            expect(solarEyes.mapClick).toHaveBeenCalled();
         });
     });
     //Test mapClick()
     describe("mapClick", function () {
-        it("should assign a value to input", function () {
-
+        //this is fine
+        it("should not affect the value of input before being called", function () {
+            expect(solarEyes.input).toBeFalsy();
         });
     });
     //Test createAreas()
@@ -58,7 +106,7 @@ describe("solarEyes", function () {
         it("should populate areasArray", function () {
 
         });
-
+        //this is fine
         it("should call makeMap()", function () {
             spyOn(solarEyes, "makeMap");
             var data = [1, 2, 3];
@@ -67,6 +115,7 @@ describe("solarEyes", function () {
         });
     });
     //Test saveOriginalTableData()
+    //this is fine
     describe("saveOriginalTableData", function () {
 
         it("should populate originalTableData", function () {
@@ -77,24 +126,27 @@ describe("solarEyes", function () {
     });
     //Test makeMap()
     describe("makeMap", function () {
-        it("should call write('mapdiv')", function () {
-
+        it("should define map", function () {
+            spyOn(makeMap, "map");
+            solarEyes.makeMap();
+            expect(map).toBeTruthy();
         });
     });
 });
 
 //Test AmCharts
+//Capybara??
 describe("AmCharts", function () {
 
-    it("should have a ready method", function () {
-
-    });
-
     it("should call stateInfo()", function () {
+        spyOn(solarEyes, "stateInfo");
 
+        expect(solarEyes.stateInfo).toHaveBeenCalled();
     });
 
     it("should call getOilPrice()", function () {
+        spyOn(solarEyes, "getOilPrice");
 
+        expect(solarEyes.getOilPrice).toHaveBeenCalled();
     });
 });
