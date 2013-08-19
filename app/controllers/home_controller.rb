@@ -2,6 +2,8 @@ class HomeController < ApplicationController
 
   def index
     @states = State.all
+    expires_in 10.minutes, public: true
+
     respond_to do |format|
       format.html
       format.json { render json: @states }

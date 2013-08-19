@@ -53,7 +53,6 @@ group :production do
   gem 'pg'
   gem 'puma'
   gem 'newrelic_rpm'
-  gem 'route_downcaser'
 end
 
 group :development, :test do
