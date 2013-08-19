@@ -46,6 +46,8 @@ gem "rack-timeout"
 # To use debugger
 # gem 'debugger'
 
+gem 'puma'
+
 # We need the pg gem for Heroku (which is our production environment)
 # Heroku will automatically configure out config/database.yml file when we deploy
 group :production do
