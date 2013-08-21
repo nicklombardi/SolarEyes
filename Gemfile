@@ -52,7 +52,12 @@ gem "rack-timeout"
 group :production do
   gem 'pg'
   gem 'puma'
+  gem 'route_downcaser'
   gem 'newrelic_rpm'
+  gem 'memcachier'
+  gem 'rack-cache'
+  gem 'dalli'
+  gem 'kgio'
 end
 
 group :development, :test do
@@ -82,11 +87,6 @@ group :development do
                             # https://github.com/dejan/rails_panel/tree/master/meta_request
 end
 
-gem 'route_downcaser'
 
 ### For rack-cache
 
-gem 'memcachier'
-gem 'rack-cache'
-gem 'dalli'
-gem 'kgio'

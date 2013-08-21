@@ -18,7 +18,7 @@ var solarEyes = {
         $.ajax({
             url: '/home',
             dataType: 'json',
-            data: 'GET'
+            type: 'GET'
         }).done(function (data) {
             console.log(data);
             that.createAreas(data);
@@ -34,7 +34,7 @@ var solarEyes = {
         $.ajax({
             url: '/get_oil_price',
             dataType: 'json',
-            data: 'GET'
+            type: 'GET'
         }).done(function (data) {
             console.log("get oil price data: " + data);
             that.oilPrice = data;
