@@ -46,11 +46,11 @@ gem "rack-timeout"
 # To use debugger
 # gem 'debugger'
 
+gem 'pg'
 
 # We need the pg gem for Heroku (which is our production environment)
 # Heroku will automatically configure out config/database.yml file when we deploy
 group :production do
-  gem 'pg'
   gem 'puma'
   gem 'route_downcaser'
   gem 'newrelic_rpm'
@@ -61,7 +61,7 @@ group :production do
 end
 
 group :development, :test do
-  gem 'sqlite3'             # Heroku doesn't run sqlite3, but Postgres. However, we can use Postgres locally
+  # gem 'sqlite3'             # Heroku doesn't run sqlite3, but Postgres. However, we can use Postgres locally
   gem 'rspec'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
